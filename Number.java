@@ -110,13 +110,27 @@ public class Number {
             boolean isValid = false;
             Number num = new Number(i);
             switch (property) {
-                case "even" -> isValid = num.isEven();
-                case "odd" -> isValid = num.isOdd();
-                case "buzz" -> isValid = num.isBuzz();
-                case "duck" -> isValid = num.isDuck();
-                case "palindromic" -> isValid = num.isPalindrome();
-                case "gapful" -> isValid = num.isGapful();
-                case "spy" -> isValid = num.isSpy();
+                case "even":
+                    isValid = num.isEven();
+                    break;
+                case "odd":
+                    isValid = num.isOdd();
+                    break;
+                case "buzz":
+                    isValid = num.isBuzz();
+                    break;
+                case "duck":
+                    isValid = num.isDuck();
+                    break;
+                case "palindromic":
+                    isValid = num.isPalindrome();
+                    break;
+                case "gapful":
+                    isValid = num.isGapful();
+                    break;
+                case "spy":
+                    isValid = num.isSpy();
+                    break;
             }
             if (isValid) {
                 counter++;
