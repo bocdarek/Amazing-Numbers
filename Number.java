@@ -73,12 +73,11 @@ public class Number {
 
     public void printProperties(int length) {
         for (long i = number; i < number + length; i++) {
-            String properties = evaluateNumber(new Number(i));
-            System.out.println(properties);
+            evaluateNumber(new Number(i));
         }
     }
 
-    private String evaluateNumber(Number num) {
+    private void evaluateNumber(Number num) {
         StringBuilder sb = new StringBuilder();
         sb.append(" ".repeat(13)).append(num.number).append(" is ");
         if (num.isEven()) {
@@ -101,11 +100,32 @@ public class Number {
         if (num.isSpy()) {
             sb.append(", spy");
         }
-        return sb.toString();
+        System.out.println(sb);
     }
 
-    public void printProperties(int length,String property) {
-        System.out.println();
-
+    public void printProperties(int length, String property) {
+        long i = number;
+        int counter = 0;
+        while (true) {
+            boolean isValid = false;
+            Number num = new Number(i);
+            switch (property) {
+                case "even" -> isValid = num.isEven();
+                case "odd" -> isValid = num.isOdd();
+                case "buzz" -> isValid = num.isBuzz();
+                case "duck" -> isValid = num.isDuck();
+                case "palindromic" -> isValid = num.isPalindrome();
+                case "gapful" -> isValid = num.isGapful();
+                case "spy" -> isValid = num.isSpy();
+            }
+            if (isValid) {
+                counter++;
+                evaluateNumber(num);
+            }
+            if (counter == length || i == Long.MAX_VALUE) {
+                break;
+            }
+            i++;
+        }
     }
 }

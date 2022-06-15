@@ -41,8 +41,16 @@ public class Main {
                 msg.errorMessage2();
                 continue;
             }
-            number.printProperties(num2);
+            if (inputs.length == 2) {
+                number.printProperties(num2);
+                continue;
+            }
+            String property = inputs[2].toLowerCase();
+            if (msg.getProperties().contains(property)) {
+                number.printProperties(num2, property);
+            } else {
+                msg.errorMessage3(property.toUpperCase());
+            }
         }
-
     }
 }

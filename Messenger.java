@@ -1,8 +1,16 @@
 package numbers;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Messenger {
+
+    private final List<String> properties =
+            List.of("buzz", "duck", "palindromic", "gapful", "spy", "even", "odd");
+
+    public List<String> getProperties() {
+        return properties;
+    }
 
     public void welcomeMessage() {
         System.out.println("Welcome to Amazing Numbers!");
