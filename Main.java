@@ -1,7 +1,5 @@
 package numbers;
 
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
 
@@ -28,8 +26,8 @@ public class Main {
                 msg.errorMessage1();
                 continue;
             }
+            Number number = new Number(num1);
             if (inputs.length == 1) {
-                Number number = new Number(num1);
                 number.printProperties();
                 continue;
             }
@@ -43,8 +41,7 @@ public class Main {
                 msg.errorMessage2();
                 continue;
             }
-            Number number = new Number(num1, num2);
-            number.printList();
+            number.printProperties(num2);
         }
 
     }

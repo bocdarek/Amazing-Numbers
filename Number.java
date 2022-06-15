@@ -3,15 +3,9 @@ package numbers;
 public class Number {
 
     private final long number;
-    private int length;
 
     public Number(long number) {
         this.number = number;
-    }
-
-    public Number(long number, int length) {
-        this(number);
-        this.length = length;
     }
 
     public boolean isEven() {
@@ -23,7 +17,7 @@ public class Number {
     }
 
     public boolean isBuzz() {
-        return  number % 7 == 0 || number % 10 == 7;
+        return number % 7 == 0 || number % 10 == 7;
     }
 
     public boolean isDuck() {
@@ -77,32 +71,41 @@ public class Number {
         System.out.printf("%12s: %b%n", "spy", isSpy());
     }
 
-    public void printList() {
+    public void printProperties(int length) {
         for (long i = number; i < number + length; i++) {
-            StringBuilder sb = new StringBuilder();
-            Number num = new Number(i);
-            sb.append(" ".repeat(13)).append(i).append(" is ");
-            if (num.isEven()) {
-                sb.append("even");
-            } else {
-                sb.append("odd");
-            }
-            if (num.isBuzz()) {
-                sb.append(", buzz");
-            }
-            if (num.isDuck()) {
-                sb.append(", duck");
-            }
-            if (num.isPalindrome()) {
-                sb.append(", palindromic");
-            }
-            if (num.isGapful()) {
-                sb.append(", gapful");
-            }
-            if (num.isSpy()) {
-                sb.append(", spy");
-            }
-            System.out.println(sb);
+            String properties = evaluateNumber(new Number(i));
+            System.out.println(properties);
         }
+    }
+
+    private String evaluateNumber(Number num) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(" ".repeat(13)).append(num.number).append(" is ");
+        if (num.isEven()) {
+            sb.append("even");
+        } else {
+            sb.append("odd");
+        }
+        if (num.isBuzz()) {
+            sb.append(", buzz");
+        }
+        if (num.isDuck()) {
+            sb.append(", duck");
+        }
+        if (num.isPalindrome()) {
+            sb.append(", palindromic");
+        }
+        if (num.isGapful()) {
+            sb.append(", gapful");
+        }
+        if (num.isSpy()) {
+            sb.append(", spy");
+        }
+        return sb.toString();
+    }
+
+    public void printProperties(int length,String property) {
+        System.out.println();
+
     }
 }

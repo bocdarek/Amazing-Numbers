@@ -12,6 +12,7 @@ public class Messenger {
         System.out.println("- enter two natural numbers to obtain the properties of the list:");
         System.out.println("  * the first parameter represents a starting number;");
         System.out.println("  * the second parameter shows how many consecutive numbers are to be processed;");
+        System.out.println("- two natural numbers and a property to search for;");
         System.out.println("- separate the parameters with one space;");
         System.out.println("- enter 0 to exit.");
     }
@@ -34,5 +35,10 @@ public class Messenger {
 
     public void errorMessage2() {
         System.out.println("The second parameter should be a natural number.");
+    }
+
+    public void errorMessage3(String property) {
+        System.out.printf("The property [%s] is wrong.%n", property);
+        System.out.println("Available properties: [EVEN, ODD, BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY]");
     }
 }
