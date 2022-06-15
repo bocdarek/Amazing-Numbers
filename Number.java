@@ -14,7 +14,6 @@ public class Number {
         this.length = length;
     }
 
-
     public boolean isEven() {
         return number % 2 == 0;
     }
@@ -55,6 +54,18 @@ public class Number {
         return number % divider == 0;
     }
 
+    public boolean isSpy() {
+        String[] numArray = String.valueOf(number).split("");
+        int sum = 0;
+        int product = 1;
+        for (String s : numArray) {
+            int num = Integer.parseInt(s);
+            sum += num;
+            product *= num;
+        }
+        return sum == product;
+    }
+
     public void printProperties() {
         System.out.printf("Properties of %,d%n", number);
         System.out.printf("%12s: %b%n", "even", isEven());
@@ -63,6 +74,7 @@ public class Number {
         System.out.printf("%12s: %b%n", "duck", isDuck());
         System.out.printf("%12s: %b%n", "palindromic", isPalindrome());
         System.out.printf("%12s: %b%n", "gapful", isGapful());
+        System.out.printf("%12s: %b%n", "spy", isSpy());
     }
 
     public void printList() {
@@ -86,6 +98,9 @@ public class Number {
             }
             if (num.isGapful()) {
                 sb.append(", gapful");
+            }
+            if (num.isSpy()) {
+                sb.append(", spy");
             }
             System.out.println(sb);
         }
