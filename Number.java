@@ -1,11 +1,15 @@
 package numbers;
 
+import java.util.List;
+
 public class Number {
 
     private final long number;
+    private final String numString;
 
     public Number(long number) {
         this.number = number;
+        this.numString = String.valueOf(number);
     }
 
     public boolean isEven() {
@@ -21,12 +25,10 @@ public class Number {
     }
 
     public boolean isDuck() {
-        String digits = String.valueOf(number);
-        return digits.contains("0");
+        return numString.contains("0");
     }
 
     public boolean isPalindrome() {
-        String numString = String.valueOf(number);
         int length = numString.length();
         boolean temp = true;
         for (int i = 0; i < length / 2 + 1; i++) {
@@ -42,14 +44,13 @@ public class Number {
         if (number < 100) {
             return false;
         }
-        String numString = String.valueOf(number);
         int divider = Integer.parseInt(String.format("%c%c",
                 numString.charAt(0), numString.charAt(numString.length() - 1)));
         return number % divider == 0;
     }
 
     public boolean isSpy() {
-        String[] numArray = String.valueOf(number).split("");
+        String[] numArray = numString.split("");
         int sum = 0;
         int product = 1;
         for (String s : numArray) {
@@ -70,6 +71,20 @@ public class Number {
         return num.isSquare();
     }
 
+    public boolean isJumping() {
+        if (numString.length() == 1) {
+            return true;
+        }
+        boolean isCorrect = true;
+        for (int i = 1; i < numString.length(); i++) {
+            if (Math.abs(numString.charAt(i) - numString.charAt(i - 1)) != 1) {
+                isCorrect = false;
+                break;
+            }
+        }
+        return isCorrect;
+    }
+
     public void printProperties() {
         System.out.printf("Properties of %,d%n", number);
         System.out.printf("%12s: %b%n", "even", isEven());
@@ -81,6 +96,7 @@ public class Number {
         System.out.printf("%12s: %b%n", "spy", isSpy());
         System.out.printf("%12s: %b%n", "square", isSquare());
         System.out.printf("%12s: %b%n", "sunny", isSunny());
+        System.out.printf("%12s: %b%n", "jumping", isJumping());
     }
 
     public void printProperties(int length) {
@@ -89,13 +105,13 @@ public class Number {
         }
     }
 
-    public void printProperties(int length, String property) {
+    public void printProperties(int length, List<String> properties) {
         long i = number;
         int counter = 0;
         while (true) {
             Number num = new Number(i);
-            boolean isValid = isPropertyMatched(num, property);
-            if (isValid) {
+            boolean areValid = areAllPropertiesMatched(num, properties);
+            if (areValid) {
                 evaluateNumber(num);
                 counter++;
             }
@@ -106,54 +122,13 @@ public class Number {
         }
     }
 
-    public void printProperties(int length, String property1, String property2) {
-        long i = number;
-        int counter = 0;
-        while (true) {
-            Number num = new Number(i);
-            boolean isValid1 = isPropertyMatched(num, property1);
-            boolean isValid2 = isPropertyMatched(num, property2);
-            if (isValid1 && isValid2) {
-                evaluateNumber(num);
-                counter++;
+    private boolean areAllPropertiesMatched(Number num, List<String> properties) {
+        for (String property : properties) {
+            if (!isPropertyMatched(num, property)) {
+                return false;
             }
-            if (counter == length || i == Long.MAX_VALUE) {
-                break;
-            }
-            i++;
         }
-    }
-
-    private void evaluateNumber(Number num) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(" ".repeat(13)).append(num.number).append(" is ");
-        if (num.isEven()) {
-            sb.append("even");
-        } else {
-            sb.append("odd");
-        }
-        if (num.isBuzz()) {
-            sb.append(", buzz");
-        }
-        if (num.isDuck()) {
-            sb.append(", duck");
-        }
-        if (num.isPalindrome()) {
-            sb.append(", palindromic");
-        }
-        if (num.isGapful()) {
-            sb.append(", gapful");
-        }
-        if (num.isSpy()) {
-            sb.append(", spy");
-        }
-        if (num.isSquare()) {
-            sb.append(", square");
-        }
-        if (num.isSunny()) {
-            sb.append(", sunny");
-        }
-        System.out.println(sb);
+        return true;
     }
 
     private boolean isPropertyMatched(Number num, String property) {
@@ -186,7 +161,46 @@ public class Number {
             case "sunny":
                 isMatched = num.isSunny();
                 break;
+            case "jumping":
+                isMatched = num.isJumping();
+                break;
         }
         return isMatched;
     }
+
+    private void evaluateNumber(Number num) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(" ".repeat(13)).append(num.number).append(" is ");
+        if (num.isEven()) {
+            sb.append("even");
+        } else {
+            sb.append("odd");
+        }
+        if (num.isBuzz()) {
+            sb.append(", buzz");
+        }
+        if (num.isDuck()) {
+            sb.append(", duck");
+        }
+        if (num.isPalindrome()) {
+            sb.append(", palindromic");
+        }
+        if (num.isGapful()) {
+            sb.append(", gapful");
+        }
+        if (num.isSpy()) {
+            sb.append(", spy");
+        }
+        if (num.isSquare()) {
+            sb.append(", square");
+        }
+        if (num.isSunny()) {
+            sb.append(", sunny");
+        }
+        if (num.isJumping()) {
+            sb.append(", jumping");
+        }
+        System.out.println(sb);
+    }
+
 }

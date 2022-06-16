@@ -1,21 +1,22 @@
 package numbers;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class Messenger {
 
-    private final List<String> properties =
-            List.of("buzz", "duck", "palindromic", "gapful", "spy", "even", "odd", "square", "sunny");
+    private final List<String> availableProperties =
+            List.of("BUZZ", "DUCK", "PALINDROMIC", "GAPFUL", "SPY", "EVEN", "ODD", "SQUARE", "SUNNY", "JUMPING");
 
-    private final String[][] exclusiveProperties = new String[][]
-                    {{"even", "odd"},
-                    {"duck", "spy"},
-                    {"square", "sunny"},};
+    private final String[][] exclusivePropertiesArray = new String[][]
+                    {{"EVEN", "ODD"},
+                    {"DUCK", "SPY"},
+                    {"SQUARE", "SUNNY"},};
 
-    public List<String> getProperties() {
-        return properties;
+    public List<String> getAvailableProperties() {
+        return availableProperties;
     }
 
     public void welcomeMessage() {
@@ -26,8 +27,7 @@ public class Messenger {
         System.out.println("- enter two natural numbers to obtain the properties of the list:");
         System.out.println("  * the first parameter represents a starting number;");
         System.out.println("  * the second parameter shows how many consecutive numbers are to be processed;");
-        System.out.println("- two natural numbers and a property to search for;");
-        System.out.println("- two natural numbers and two properties to search for;");
+        System.out.println("- two natural numbers and properties to search for;");
         System.out.println("- separate the parameters with one space;");
         System.out.println("- enter 0 to exit.");
     }
@@ -52,38 +52,52 @@ public class Messenger {
         System.out.println("The second parameter should be a natural number.");
     }
 
-    public void errorMessage3(String property) {
-        System.out.printf("The property [%s] is wrong.%n", property.toUpperCase());
+    public void errorMessage3(List<String> properties) {
+        List<String> wrongProperties = new ArrayList<>();
+        for (String property : properties) {
+            if (!availableProperties.contains(property)) {
+                wrongProperties.add(property);
+            }
+        }
+        if (wrongProperties.size() == 1) {
+            System.out.println("The property " + wrongProperties.toString() + " is wrong.");
+        } else {
+            System.out.println("The properties " + wrongProperties.toString() + " are wrong.");
+        }
         printAvailableProperties();
     }
 
-    public void errorMessage4(String property1, String property2) {
-        System.out.printf("The properties [%s, %s] are wrong.%n",
-                property1.toUpperCase(), property2.toUpperCase());
-        printAvailableProperties();
-    }
-
-    public void errorMessage5(String property1, String property2) {
-        System.out.printf("The request contains mutually exclusive properties: [%s, %s]%n",
-                property1.toUpperCase(), property2.toUpperCase());
+    public void errorMessage4(List<String> properties) {
+        List<String> allExclusives = new ArrayList<>();
+        for (String[] exclusiveProperties : exclusivePropertiesArray) {
+            if (properties.containsAll(List.of(exclusiveProperties))) {
+                allExclusives.addAll(List.of(exclusiveProperties));
+            }
+        }
+        System.out.println("The request contains mutually exclusive properties: " + allExclusives.toString());
         System.out.println("There are no numbers with these properties.");
     }
 
     private void printAvailableProperties() {
-        System.out.println("Available properties: " +
-                "[EVEN, ODD, BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, SQUARE, SUNNY]");
+        System.out.print("Available properties: ");
+        System.out.println(availableProperties.toString());
     }
 
-    public boolean areNotExclusive(String property1, String property2) {
-        String[] propArray = new String[]{property1, property2};
-        Arrays.sort(propArray);
-        boolean areValid = true;
-        for (String[] properties : exclusiveProperties) {
-            if (Arrays.equals(propArray, properties)) {
-                areValid = false;
-                break;
+    public boolean areAllValid(List<String> properties) {
+        for (String property : properties) {
+            if (!availableProperties.contains(property)) {
+                return false;
             }
         }
-        return areValid;
+        return true;
+    }
+
+    public boolean areNotExclusive(List<String> properties) {
+        for (String[] exclusiveProperties : exclusivePropertiesArray) {
+            if (properties.containsAll(List.of(exclusiveProperties))) {
+                return false;
+            }
+        }
+        return true;
     }
 }

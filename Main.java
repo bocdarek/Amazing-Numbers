@@ -1,5 +1,8 @@
 package numbers;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -45,24 +48,15 @@ public class Main {
                 number.printProperties(num2);
                 continue;
             }
-            String property1 = inputs[2].toLowerCase();
-            if (inputs.length == 3) {
-                if (msg.getProperties().contains(property1)) {
-                    number.printProperties(num2, property1);
+            List<String> properties = List.of(Arrays.copyOfRange(inputs, 2, inputs.length));
+            if (msg.areAllValid(properties)) {
+                if (msg.areNotExclusive(properties)) {
+                    number.printProperties(num2, properties);
                 } else {
-                    msg.errorMessage3(property1);
-                }
-                continue;
-            }
-            String property2 = inputs[3].toLowerCase();
-            if (msg.getProperties().contains(property1) && msg.getProperties().contains(property2)) {
-                if (msg.areNotExclusive(property1, property2)) {
-                    number.printProperties(num2, property1, property2);
-                } else {
-                    msg.errorMessage5(property1, property2);
+                    msg.errorMessage4(properties);
                 }
             } else {
-                msg.errorMessage4(property1, property2);
+                msg.errorMessage3(properties);
             }
         }
     }
