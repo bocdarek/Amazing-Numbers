@@ -17,6 +17,11 @@ public class Messenger {
     public void welcomeMessage() {
         System.out.println("Welcome to Amazing Numbers!");
         System.out.println();
+        printInstructions();
+
+    }
+
+    public void printInstructions() {
         System.out.println("Supported requests:");
         System.out.println("- enter a natural number to know its properties;");
         System.out.println("- enter two natural numbers to obtain the properties of the list:");

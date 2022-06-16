@@ -11,7 +11,7 @@ public class Main {
         while (true) {
             String input = msg.takeInput();
             if (input.isEmpty()) {
-                msg.welcomeMessage();
+                msg.printInstructions();
                 continue;
             }
             if (input.equals("0")) {
