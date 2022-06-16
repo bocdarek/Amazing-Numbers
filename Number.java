@@ -170,7 +170,7 @@ public class Number {
 
     private void evaluateNumber(Number num) {
         StringBuilder sb = new StringBuilder();
-        sb.append(" ".repeat(13)).append(num.number).append(" is ");
+        sb.append(String.format("%,20d",num.number)).append(" is ");
         if (num.isEven()) {
             sb.append("even");
         } else {
