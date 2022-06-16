@@ -1,7 +1,6 @@
 package numbers;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,10 +13,6 @@ public class Messenger {
                     {{"EVEN", "ODD"},
                     {"DUCK", "SPY"},
                     {"SQUARE", "SUNNY"},};
-
-    public List<String> getAvailableProperties() {
-        return availableProperties;
-    }
 
     public void welcomeMessage() {
         System.out.println("Welcome to Amazing Numbers!");
@@ -60,9 +55,9 @@ public class Messenger {
             }
         }
         if (wrongProperties.size() == 1) {
-            System.out.println("The property " + wrongProperties.toString() + " is wrong.");
+            System.out.println("The property " + wrongProperties + " is wrong.");
         } else {
-            System.out.println("The properties " + wrongProperties.toString() + " are wrong.");
+            System.out.println("The properties " + wrongProperties + " are wrong.");
         }
         printAvailableProperties();
     }
@@ -74,7 +69,7 @@ public class Messenger {
                 allExclusives.addAll(List.of(exclusiveProperties));
             }
         }
-        System.out.println("The request contains mutually exclusive properties: " + allExclusives.toString());
+        System.out.println("The request contains mutually exclusive properties: " + allExclusives);
         System.out.println("There are no numbers with these properties.");
     }
 
