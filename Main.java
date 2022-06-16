@@ -45,11 +45,24 @@ public class Main {
                 number.printProperties(num2);
                 continue;
             }
-            String property = inputs[2].toLowerCase();
-            if (msg.getProperties().contains(property)) {
-                number.printProperties(num2, property);
+            String property1 = inputs[2].toLowerCase();
+            if (inputs.length == 3) {
+                if (msg.getProperties().contains(property1)) {
+                    number.printProperties(num2, property1);
+                } else {
+                    msg.errorMessage3(property1);
+                }
+                continue;
+            }
+            String property2 = inputs[3].toLowerCase();
+            if (msg.getProperties().contains(property1) && msg.getProperties().contains(property2)) {
+                if (msg.areNotExclusive(property1, property2)) {
+                    number.printProperties(num2, property1, property2);
+                } else {
+                    msg.errorMessage5(property1, property2);
+                }
             } else {
-                msg.errorMessage3(property.toUpperCase());
+                msg.errorMessage4(property1, property2);
             }
         }
     }
