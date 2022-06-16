@@ -134,34 +134,34 @@ public class Number {
     private boolean isPropertyMatched(Number num, String property) {
         boolean isMatched = false;
         switch (property) {
-            case "even":
+            case "EVEN":
                 isMatched = num.isEven();
                 break;
-            case "odd":
+            case "ODD":
                 isMatched = num.isOdd();
                 break;
-            case "buzz":
+            case "BUZZ":
                 isMatched = num.isBuzz();
                 break;
-            case "duck":
+            case "DUCK":
                 isMatched = num.isDuck();
                 break;
-            case "palindromic":
+            case "PALINDROMIC":
                 isMatched = num.isPalindrome();
                 break;
-            case "gapful":
+            case "GAPFUL":
                 isMatched = num.isGapful();
                 break;
-            case "spy":
+            case "SPY":
                 isMatched = num.isSpy();
                 break;
-            case "square":
+            case "SQUARE":
                 isMatched = num.isSquare();
                 break;
-            case "sunny":
+            case "SUNNY":
                 isMatched = num.isSunny();
                 break;
-            case "jumping":
+            case "JUMPING":
                 isMatched = num.isJumping();
                 break;
         }

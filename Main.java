@@ -18,7 +18,7 @@ public class Main {
                 msg.goodbyeMessage();
                 return;
             }
-            String[] inputs = input.split("\\s+");
+            String[] inputs = input.toUpperCase().split("\\s+");
             long num1;
             try {
                 num1 = Long.parseLong(inputs[0]);
