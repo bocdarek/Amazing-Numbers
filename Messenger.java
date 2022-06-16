@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Messenger {
 
     private final List<String> properties =
-            List.of("buzz", "duck", "palindromic", "gapful", "spy", "even", "odd");
+            List.of("buzz", "duck", "palindromic", "gapful", "spy", "even", "odd", "square", "sunny");
 
     public List<String> getProperties() {
         return properties;
@@ -21,6 +21,7 @@ public class Messenger {
         System.out.println("  * the first parameter represents a starting number;");
         System.out.println("  * the second parameter shows how many consecutive numbers are to be processed;");
         System.out.println("- two natural numbers and a property to search for;");
+        System.out.println("- two natural numbers and two properties to search for;");
         System.out.println("- separate the parameters with one space;");
         System.out.println("- enter 0 to exit.");
     }
@@ -47,6 +48,16 @@ public class Messenger {
 
     public void errorMessage3(String property) {
         System.out.printf("The property [%s] is wrong.%n", property);
-        System.out.println("Available properties: [EVEN, ODD, BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY]");
+        printAvailableProperties();
+    }
+
+    public void errorMessage4(String property1, String property2) {
+        System.out.printf("The properties [%s, %s] are wrong.%n", property1, property2);
+        printAvailableProperties();
+    }
+
+    private void printAvailableProperties() {
+        System.out.println("Available properties: " +
+                "[EVEN, ODD, BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, SQUARE, SUNNY]");
     }
 }
