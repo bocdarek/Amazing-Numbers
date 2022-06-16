@@ -1,5 +1,6 @@
 package numbers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Number {
@@ -85,6 +86,32 @@ public class Number {
         return isCorrect;
     }
 
+    public boolean isHappy() {
+        List<Long> visitedNumbers = new ArrayList<>();
+        long next = number;
+        while (!visitedNumbers.contains(next)) {
+            visitedNumbers.add(next);
+            next = calculateNext(next);
+            if (next == 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isSad() {
+        return !isHappy();
+    }
+
+    private long calculateNext(long number) {
+        String[] digitsArray = String.valueOf(number).split("");
+        long sum = 0;
+        for (String digit : digitsArray) {
+            sum += Math.pow(Integer.parseInt(digit), 2);
+        }
+        return sum;
+    }
+
     public void printProperties() {
         System.out.printf("Properties of %,d%n", number);
         System.out.printf("%12s: %b%n", "even", isEven());
@@ -97,6 +124,8 @@ public class Number {
         System.out.printf("%12s: %b%n", "square", isSquare());
         System.out.printf("%12s: %b%n", "sunny", isSunny());
         System.out.printf("%12s: %b%n", "jumping", isJumping());
+        System.out.printf("%12s: %b%n", "happy", isHappy());
+        System.out.printf("%12s: %b%n", "sad", isSad());
     }
 
     public void printProperties(int length) {
@@ -124,6 +153,13 @@ public class Number {
 
     private boolean areAllPropertiesMatched(Number num, List<String> properties) {
         for (String property : properties) {
+            if (property.startsWith("-")) {
+                if (isPropertyMatched(num, property.substring(1))) {
+                    return false;
+                } else {
+                    continue;
+                }
+            }
             if (!isPropertyMatched(num, property)) {
                 return false;
             }
@@ -164,6 +200,12 @@ public class Number {
             case "JUMPING":
                 isMatched = num.isJumping();
                 break;
+            case "HAPPY":
+                isMatched = num.isHappy();
+                break;
+            case "SAD":
+                isMatched = num.isSad();
+                break;
         }
         return isMatched;
     }
@@ -199,6 +241,12 @@ public class Number {
         }
         if (num.isJumping()) {
             sb.append(", jumping");
+        }
+        if (num.isHappy()) {
+            sb.append(", happy");
+        }
+        if (num.isSad()) {
+            sb.append(", sad");
         }
         System.out.println(sb);
     }

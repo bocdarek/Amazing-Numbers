@@ -1,24 +1,42 @@
 package numbers;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Messenger {
 
     private final List<String> availableProperties =
-            List.of("BUZZ", "DUCK", "PALINDROMIC", "GAPFUL", "SPY", "EVEN", "ODD", "SQUARE", "SUNNY", "JUMPING");
+            List.of("BUZZ", "DUCK", "PALINDROMIC", "GAPFUL", "SPY", "EVEN", "ODD", "SQUARE",
+                    "SUNNY", "JUMPING", "HAPPY", "SAD");
+
+    private final List<String> oppositeProperties =
+            List.of("-BUZZ", "-DUCK", "-PALINDROMIC", "-GAPFUL", "-SPY", "-EVEN", "-ODD", "-SQUARE",
+                    "-SUNNY", "-JUMPING", "-HAPPY", "-SAD");
 
     private final String[][] exclusivePropertiesArray = new String[][]
                     {{"EVEN", "ODD"},
                     {"DUCK", "SPY"},
-                    {"SQUARE", "SUNNY"},};
+                    {"SQUARE", "SUNNY"},
+                    {"HAPPY", "SAD"},
+                    {"-EVEN", "-ODD"},
+                    {"-DUCK", "-SPY"},
+                    {"-SQUARE", "-SUNNY"},
+                    {"-HAPPY", "-SAD"},
+                    {"EVEN", "-EVEN"},
+                    {"ODD", "-ODD"},
+                    {"BUZZ", "-BUZZ"},
+                    {"DUCK", "-DUCK"},
+                    {"PALINDROMIC", "-PALINDROMIC"},
+                    {"GAPFUL", "-GAPFUL"},
+                    {"SQUARE", "-SQUARE"},
+                    {"SUNNY", "-SUNNY"},
+                    {"JUMPING", "-JUMPING"},
+                    {"HAPPY", "-HAPPY"},
+                    {"SAD", "-SAD"}};
 
     public void welcomeMessage() {
         System.out.println("Welcome to Amazing Numbers!");
         System.out.println();
         printInstructions();
-
     }
 
     public void printInstructions() {
@@ -28,6 +46,7 @@ public class Messenger {
         System.out.println("  * the first parameter represents a starting number;");
         System.out.println("  * the second parameter shows how many consecutive numbers are to be processed;");
         System.out.println("- two natural numbers and properties to search for;");
+        System.out.println("- a property preceded by minus must not be present in numbers;");
         System.out.println("- separate the parameters with one space;");
         System.out.println("- enter 0 to exit.");
     }
@@ -55,7 +74,7 @@ public class Messenger {
     public void errorMessage3(List<String> properties) {
         List<String> wrongProperties = new ArrayList<>();
         for (String property : properties) {
-            if (!availableProperties.contains(property)) {
+            if (!(availableProperties.contains(property) || oppositeProperties.contains(property))) {
                 wrongProperties.add(property);
             }
         }
@@ -68,7 +87,7 @@ public class Messenger {
     }
 
     public void errorMessage4(List<String> properties) {
-        List<String> allExclusives = new ArrayList<>();
+        Set<String> allExclusives = new HashSet<>();
         for (String[] exclusiveProperties : exclusivePropertiesArray) {
             if (properties.containsAll(List.of(exclusiveProperties))) {
                 allExclusives.addAll(List.of(exclusiveProperties));
@@ -80,12 +99,12 @@ public class Messenger {
 
     private void printAvailableProperties() {
         System.out.print("Available properties: ");
-        System.out.println(availableProperties.toString());
+        System.out.println(availableProperties);
     }
 
     public boolean areAllValid(List<String> properties) {
         for (String property : properties) {
-            if (!availableProperties.contains(property)) {
+            if (!(availableProperties.contains(property) || oppositeProperties.contains(property))) {
                 return false;
             }
         }
