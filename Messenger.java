@@ -18,8 +18,6 @@ public class Messenger {
                     {"SQUARE", "SUNNY"},
                     {"HAPPY", "SAD"},
                     {"-EVEN", "-ODD"},
-                    {"-DUCK", "-SPY"},
-                    {"-SQUARE", "-SUNNY"},
                     {"-HAPPY", "-SAD"},
                     {"EVEN", "-EVEN"},
                     {"ODD", "-ODD"},
@@ -48,6 +46,7 @@ public class Messenger {
         System.out.println("- two natural numbers and properties to search for;");
         System.out.println("- a property preceded by minus must not be present in numbers;");
         System.out.println("- separate the parameters with one space;");
+        printAvailableProperties();
         System.out.println("- enter 0 to exit.");
     }
 
@@ -98,7 +97,7 @@ public class Messenger {
     }
 
     private void printAvailableProperties() {
-        System.out.print("Available properties: ");
+        System.out.print("- Available properties: ");
         System.out.println(availableProperties);
     }
 
